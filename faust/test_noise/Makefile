@@ -9,7 +9,11 @@ CPP_FILES := $(addsuffix .dsp.cpp, $(DSP_NAMES))
 
 .PHONY: all clean
 
-all: $(C_BIN) $(DSP_BINS)
+all: c dsp
+
+c: $(C_BIN) 
+
+dsp: $(DSP_BINS)
 
 $(C_BIN): $(C_SRC)
 	@gcc $< -o $@ -llo && echo "Compilado $@"
