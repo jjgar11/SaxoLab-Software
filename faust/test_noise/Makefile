@@ -1,32 +1,32 @@
 C_SRC := set_level_noise.c
-BIN := set_level_noise
+C_BIN := set_level_noise
 
-BASE_DIR := $(HOME)/faust/noise
+BASE_DIR := $(HOME)/faust/test_noise
 DSP_FILES := $(wildcard $(BASE_DIR)/*.dsp)
-BINARIES := $(patsubst $(BASE_DIR)/%.dsp, $(BASE_DIR)/%, $(DSP_FILES))
-
+DSP_NAMES := $(basename $(notdir $(DSP_FILES)))
+DSP_BINS := $(addprefix $(BASE_DIR)/, $(DSP_NAMES))
+CPP_FILES := $(addsuffix .dsp.cpp, $(DSP_NAMES))
 
 .PHONY: all clean
 
-all: $(BIN) $(OUTPUT_DIR) $(BINARIES)
+all: $(C_BIN) $(DSP_BINS)
 
-$(BIN): $(C_SRC)
+$(C_BIN): $(C_SRC)
 	@gcc $< -o $@ -llo && echo "Compilado $@"
 
-$(OUTPUT_DIR):
-	@mkdir -p $@
-	@echo "Creado directorio $@"
-
-$(OUTPUT_DIR)/%: $(INPUT_DIR)/%.dsp
+$(BASE_DIR)/%: $(BASE_DIR)/%.dsp
 	@echo "Procesando $<..."
-	@echo "En $(INPUT_DIR)/$*..."
+	@echo "En $(BASE_DIR)/$*..."
 	@faust2alsaconsole -osc $<
-	@if [ -f $(INPUT_DIR)/$* ]; then \
-		mv $(INPUT_DIR)/$* $@ && echo "Movido ejecutable $* a $(OUTPUT_DIR)"; \
+	@if [ -f $(BASE_DIR)/$* ]; then \
+		mv $(BASE_DIR)/$* $@ && echo "Movido ejecutable $* a $(BASE_DIR)"; \
 	else \
-		echo "No se encontró el ejecutable $(INPUT_DIR)$* generado para $<"; \
+		echo "No se encontró el ejecutable generado para $<"; \
 	fi
 
-
 clean:
-	rm -f $(BIN) $(BINARIES)
+	@rm -f $(C_BIN)
+	@echo "$(DSP_BINS)"
+	@rm -f $(DSP_BINS)
+	@rm -f $(addprefix $(BASE_DIR)/, $(CPP_FILES))
+	@echo "Limpieza completa: ejecutables y archivos .cpp eliminados"
