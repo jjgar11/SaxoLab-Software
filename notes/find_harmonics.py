@@ -4,11 +4,14 @@ import scipy.signal
 import librosa
 import re
 import argparse
+import shutil
 from enum import Enum
 
 NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 FLAT_TO_SHARP = {"Db": "C#", "Eb": "D#", "Gb": "F#", "Ab": "G#", "Bb": "A#"}
-GAIN_LINES = ["", "gain = hslider(\"gain\", 0, 0, 1, 0.01);", ""]
+
+INIT_GAIN = 0
+GAIN_LINES = ["", "gain = hslider(\"gain\", " + str(INIT_GAIN) +", 0, 1, 0.01);", ""]
 
 class ControllerType(str, Enum):
     BUTTON = "button"
@@ -167,6 +170,13 @@ def generate_files(args):
         f.write("\n".join(output_lines_hslider_selector))
 
     print("Archivo FAUST 'sax_synth.dsp' generado con éxito.")
+
+    for fname in os.listdir(notes_faust_dir):
+        shutil.copy(os.path.join(notes_faust_dir, fname), os.path.join(base_dir, "../faust/single_notes/sax_single_notes_faust"))
+    for fname in os.listdir(scripts_dir):
+        shutil.copy(os.path.join(scripts_dir, fname), os.path.join(base_dir, "../faust/sax_full/sax_full_faust"))
+    for fname in os.listdir(os.path.join(base_dir, "test_noise")):
+        shutil.copy(os.path.join(base_dir, "test_noise", fname), os.path.join(base_dir, "../faust/test_noise"))
 
 def valid_controller_type(s):
     try:
