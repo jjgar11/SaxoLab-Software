@@ -41,7 +41,7 @@ void test_volume(lo_address t) {
 }
 
 void test_notes(lo_address t) {
-    lo_send(t, GAIN, "f", 0.4);
+    lo_send(t, GAIN, "f", 0.2);
     for (int i = 0; i < 32; i++) {
         lo_send(t, NOTE, "i", i);
         printf("Cambiando nota %d\n", i);

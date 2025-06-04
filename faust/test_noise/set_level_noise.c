@@ -7,7 +7,7 @@
 #define OSC_HOST "localhost"
 
 #define PREFIX "/noise"
-#define GAIN   PREFIX "/gain"
+#define GAIN   PREFIX "/level"
 
 int main() {
     lo_address t = lo_address_new(OSC_HOST, OSC_PORT);

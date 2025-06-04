@@ -13,7 +13,7 @@ FLAT_TO_SHARP = {"Db": "C#", "Eb": "D#", "Gb": "F#", "Ab": "G#", "Bb": "A#"}
 INIT_GAIN = 0
 GAIN_LINES = ["", "gain = hslider(\"gain\", " + str(INIT_GAIN) +", 0, 1, 0.01);", ""]
 
-TEST_FILE = ["declare options \"[osc:on]\";", "import(\"stdfaust.lib\");", "process = no.noise*hslider(\"level\",0.02,0,1,0.01);", ""]
+TEST_FILE = ["declare options \"[osc:on]\";", "import(\"stdfaust.lib\");", "process = no.noise*hslider(\"level\",0.00,0,1,0.01);", ""]
 
 class ControllerType(str, Enum):
     BUTTON = "button"
