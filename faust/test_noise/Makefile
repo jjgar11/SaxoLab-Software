@@ -18,11 +18,6 @@ $(BASE_DIR)/%: $(BASE_DIR)/%.dsp
 	@echo "Procesando $<..."
 	@echo "En $(BASE_DIR)/$*..."
 	@faust2alsaconsole -osc $<
-	@if [ -f $(BASE_DIR)/$* ]; then \
-		mv $(BASE_DIR)/$* $@ && echo "Movido ejecutable $* a $(BASE_DIR)"; \
-	else \
-		echo "No se encontró el ejecutable generado para $<"; \
-	fi
 
 clean:
 	@rm -f $(C_BIN)
