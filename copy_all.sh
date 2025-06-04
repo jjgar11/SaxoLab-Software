@@ -1,0 +1,1 @@
+sudo cp -avr ./faust/* ../../code/debian_fs/debian_bookworm/root/faust/
