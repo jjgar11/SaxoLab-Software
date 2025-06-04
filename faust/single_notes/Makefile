@@ -25,6 +25,5 @@ $(OUTPUT_DIR)/%: $(INPUT_DIR)/%.dsp
 	fi
 
 clean:
-	@rm -rf $(OUTPUT_DIR)
 	@rm -f $(addprefix $(INPUT_DIR)/, $(CPP_FILES))
 	@echo "Limpieza completa: ejecutables y archivos .cpp eliminados"

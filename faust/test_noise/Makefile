@@ -26,7 +26,5 @@ $(BASE_DIR)/%: $(BASE_DIR)/%.dsp
 
 clean:
 	@rm -f $(C_BIN)
-	@echo "$(DSP_BINS)"
-	@rm -f $(DSP_BINS)
 	@rm -f $(addprefix $(BASE_DIR)/, $(CPP_FILES))
 	@echo "Limpieza completa: ejecutables y archivos .cpp eliminados"
