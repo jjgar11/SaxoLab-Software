@@ -13,6 +13,8 @@ FLAT_TO_SHARP = {"Db": "C#", "Eb": "D#", "Gb": "F#", "Ab": "G#", "Bb": "A#"}
 INIT_GAIN = 0
 GAIN_LINES = ["", "gain = hslider(\"gain\", " + str(INIT_GAIN) +", 0, 1, 0.01);", ""]
 
+TEST_FILE = ["declare options \"[osc:on]\";", "declare options \"[osc:on]\";", "import(\"stdfaust.lib\");", "process = no.noise*hslider(\"level\",0.02,0,1,0.01);"]
+
 class ControllerType(str, Enum):
     BUTTON = "button"
     HSLIDER = "hslider"
@@ -103,8 +105,10 @@ def generate_files(args):
     notes_dir = os.path.join(base_dir, "sax_notes")
     notes_faust_dir = os.path.join(base_dir, "sax_single_notes_faust")
     scripts_dir = os.path.join(base_dir, "sax_full_faust")
+    test_dir = os.path.join(base_dir, "test_noise")
     os.makedirs(notes_faust_dir, exist_ok=True)
     os.makedirs(scripts_dir, exist_ok=True)
+    os.makedirs(test_dir, exist_ok=True)
 
     files = os.listdir(notes_dir)
     notes = organize_notes_info(files)
@@ -168,15 +172,20 @@ def generate_files(args):
         f.write("\n".join(GAIN_LINES))
         f.write("\n".join(notes_lines))
         f.write("\n".join(output_lines_hslider_selector))
+    
+    with open(os.path.join(test_dir, "noise.dsp"), "w") as f:
+        f.write("\n".join(TEST_FILE))
 
     print("Archivo FAUST 'sax_synth.dsp' generado con éxito.")
 
-    for fname in os.listdir(notes_faust_dir):
-        shutil.copy(os.path.join(notes_faust_dir, fname), os.path.join(base_dir, "../faust/single_notes/sax_single_notes_faust"))
-    for fname in os.listdir(scripts_dir):
-        shutil.copy(os.path.join(scripts_dir, fname), os.path.join(base_dir, "../faust/sax_full/sax_full_faust"))
-    for fname in os.listdir(os.path.join(base_dir, "test_noise")):
-        shutil.copy(os.path.join(base_dir, "test_noise", fname), os.path.join(base_dir, "../faust/test_noise"))
+    destination_copy = {notes_faust_dir: os.path.join(base_dir, "../faust/single_notes/sax_single_notes_faust/"),
+                       scripts_dir: os.path.join(base_dir, "../faust/sax_full/sax_full_faust/"),
+                       test_dir: os.path.join(base_dir, "../faust/test_noise/")}
+    
+    for copy, paste in destination_copy.items():
+        os.makedirs(paste, exist_ok=True)
+        for fname in os.listdir(copy):
+            shutil.copy(os.path.join(copy, fname), paste)
 
 def valid_controller_type(s):
     try:
