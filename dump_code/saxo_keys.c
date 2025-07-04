@@ -4,9 +4,7 @@
 #include <unistd.h>
 #include <linux/input.h>
 #include <stdbool.h>
-
-#define MAX_KEYS 256 // Maximum number of keys
-#define OCTAVE_KEY KEY_Z // Adjust based on your keyboard layout
+#include "constants.h"
 
 
 /*
@@ -59,9 +57,9 @@ void check_saxophone_notes() {
         keys_pressed[KEY_N] ){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 8)
-            printf("Playing Eb' : Mib'\n", pressed_count);
+            printf("Playing Eb' : Mib'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 7)
-            printf("Playing Eb : Mib\n", pressed_count);
+            printf("Playing Eb : Mib\nPressed keys : %d\n", pressed_count);
 
     }
 
@@ -70,106 +68,106 @@ void check_saxophone_notes() {
         keys_pressed[KEY_M] &&
         (pressed_count == 7)
         ) {
-        printf("Playing C : DO'\n", pressed_count);
+        printf("Playing C : DO'\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T] && 
         keys_pressed[KEY_U] && keys_pressed[KEY_I] && keys_pressed[KEY_O]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 7)
-            printf("Playing  D' : RE'\n", pressed_count);
+            printf("Playing  D' : RE'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 6)
-            printf("Playing  D : RE\n", pressed_count);
+            printf("Playing  D : RE\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T] && 
         keys_pressed[KEY_U] && keys_pressed[KEY_I]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 6)
-            printf("Playing  E' : Mi'\n", pressed_count);
+            printf("Playing  E' : Mi'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 5)
-            printf("Playing  E' : Mi\n", pressed_count);
+            printf("Playing  E' : Mi\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T] && 
         keys_pressed[KEY_U]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 5)
-            printf("Playing  F' : FA'\n", pressed_count);
+            printf("Playing  F' : FA'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 4)
-            printf("Playing  F : FA\n", pressed_count);
+            printf("Playing  F : FA\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T] && 
         keys_pressed[KEY_I]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 5)
-            printf("Playing  F#' : FA#'\n", pressed_count);
+            printf("Playing  F#' : FA#'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 4)
-            printf("Playing  F# : FA#\n", pressed_count);
+            printf("Playing  F# : FA#\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T] && 
         keys_pressed[KEY_G]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 5)
-            printf("Playing  G#' : SOL#'\n", pressed_count);
+            printf("Playing  G#' : SOL#'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 4)
-            printf("Playing  G# : SOL#\n", pressed_count);
+            printf("Playing  G# : SOL#\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 4)
-            printf("Playing  G' : SOL'\n", pressed_count);
+            printf("Playing  G' : SOL'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 3)
-            printf("Playing  G : SOL\n", pressed_count);
+            printf("Playing  G : SOL\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_V]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 4)
-            printf("Playing  Bb' : SIb'\n", pressed_count);
+            printf("Playing  Bb' : SIb'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 3)
-            printf("Playing  Bb : SIb\n", pressed_count);
+            printf("Playing  Bb : SIb\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 3)
-            printf("Playing  A' : LA'\n", pressed_count);
+            printf("Playing  A' : LA'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 2)
-            printf("Playing  A : LA\n", pressed_count);
+            printf("Playing  A : LA\nPressed keys : %d\n", pressed_count);
     }
 
 
     if (keys_pressed[KEY_W]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 2)
-            printf("Playing   B' : SI'\n", pressed_count);
+            printf("Playing   B' : SI'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 1)
-            printf("Playing   B : SI\n", pressed_count);
+            printf("Playing   B : SI\nPressed keys : %d\n", pressed_count);
     }
 
     if (keys_pressed[KEY_R]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 2)
-            printf("Playing   C' : DO'\n", pressed_count);
+            printf("Playing   C' : DO'\nPressed keys : %d\n", pressed_count);
           if (pressed_count == 1)
-            printf("Playing   C : DO\n", pressed_count);
+            printf("Playing   C : DO\nPressed keys : %d\n", pressed_count);
     }
 
 
     if ( 
         (pressed_count == 1) &&
         keys_pressed[OCTAVE_KEY]) {
-        printf("Playing C#' : DO#'\n", pressed_count);
+        printf("Playing C#' : DO#'\nPressed keys : %d\n", pressed_count);
     }
 
 }
 
 int main() {
-    int fd = open("/dev/input/event0", O_RDONLY);
+    int fd = open(KEYBOARD_FILE, O_RDONLY);
     if (fd == -1) {
         perror("Error opening device");
         return EXIT_FAILURE;
@@ -187,14 +185,15 @@ int main() {
         if (ev.type == EV_KEY) {
             if (ev.value == 1) { // Key pressed
                 keys_pressed[ev.code] = true; // Mark key as pressed
+                printf("Key pressed %d\n", ev.code);
             } else if (ev.value == 0) { // Key released
                 keys_pressed[ev.code] = false; // Mark key as released
-                int pressed_count = count_pressed_keys();
+                printf("\n\n");
             }
             check_saxophone_notes(); // Check for notes and count pressed keys
         }
     }
-
+    
     close(fd);
     return EXIT_SUCCESS;
 }

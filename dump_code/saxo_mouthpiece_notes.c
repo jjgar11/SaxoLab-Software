@@ -9,11 +9,9 @@
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
 #include <stdint.h>
+#include "constants.h"
 
 
-#define OSC_PORT 5513
-#define MAX_KEYS 256 // Maximum number of keys
-#define OCTAVE_KEY KEY_Z // Adjust based on your keyboard layout
 #define MCP3221_ADDR 0x4D
 
 /*
@@ -87,7 +85,7 @@ DO#'    :  Z               659.26 Hz
 
 bool keys_pressed[MAX_KEYS] = {false}; // Array to track pressed keys
 lo_address t;
-const char *mouthpiece = "/dev/i2c-3";
+const char *mouthpiece = MOUTHPIECE;
 
 unsigned char mouthpiece_gain(void){
   int file;
@@ -306,8 +304,8 @@ void check_saxophone_notes() {
 }
 
 int main() {
-    int fd = open("/dev/input/event0", O_RDONLY);
-    t = lo_address_new("localhost", "5513");
+    int fd = open(KEYBOARD_FILE, O_RDONLY);
+    t = lo_address_new(OSC_HOST, OSC_PORT);
     if (fd == -1) {
         perror("Error opening device");
         return EXIT_FAILURE;

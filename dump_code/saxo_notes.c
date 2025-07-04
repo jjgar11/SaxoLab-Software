@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <lo/lo.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <linux/input.h>
 #include <stdbool.h>
 #include <math.h>
+#include <lo/lo.h>
+#include "constants.h"
 
-#define OSC_PORT 5513
-#define MAX_KEYS 256 // Maximum number of keys
-#define OCTAVE_KEY KEY_Z // Adjust based on your keyboard layout
 
 
 /*
@@ -96,19 +94,19 @@ int count_pressed_keys() {
 
 void check_saxophone_notes() {
     int pressed_count = count_pressed_keys();
-    double frequency_note;
+    int note_to_play;
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T] && 
         keys_pressed[KEY_U] && keys_pressed[KEY_I] && keys_pressed[KEY_O] &&
         keys_pressed[KEY_N] ){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 8){
-            printf("Playing Eb' : Mib'\n");
-            frequency_note = 369.99;
+            printf("Playing Eb' : Mib'\nPressed keys : %d\n", pressed_count);
+            note_to_play = 1;
           }
           if (pressed_count == 7){
-            frequency_note = 184.99;
-            printf("Playing Eb : Mib\n");
+            note_to_play = 1;
+            printf("Playing Eb : Mib\nPressed keys : %d\n", pressed_count);
           }
 
     }
@@ -118,20 +116,20 @@ void check_saxophone_notes() {
         keys_pressed[KEY_M] &&
         (pressed_count == 7)
         ) {
-          printf("Playing C : DO'\n");
-          frequency_note = 155.56;
+          printf("Playing C : DO'\nPressed keys : %d\n", pressed_count);
+          note_to_play = 2;
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T] && 
         keys_pressed[KEY_U] && keys_pressed[KEY_I] && keys_pressed[KEY_O]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 7){
-            frequency_note = 349.23;   
-            printf("Playing  D' : RE'\n");
+            note_to_play = 3;
+            printf("Playing  D' : RE'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 6){
-            frequency_note = 174.61; 
-            printf("Playing  D : RE\n");
+            note_to_play = 4;
+            printf("Playing  D : RE\nPressed keys : %d\n", pressed_count);
           }
     }
 
@@ -139,12 +137,12 @@ void check_saxophone_notes() {
         keys_pressed[KEY_U] && keys_pressed[KEY_I]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 6){
-            frequency_note = 392.00;
-            printf("Playing  E' : Mi'\n");
+            note_to_play = 5;
+            printf("Playing  E' : Mi'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 5){ 
-            frequency_note = 195.99;
-            printf("Playing  E : Mi\n");
+            note_to_play = 6;
+            printf("Playing  E : Mi\nPressed keys : %d\n", pressed_count);
           }
     }
 
@@ -152,12 +150,12 @@ void check_saxophone_notes() {
         keys_pressed[KEY_U]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 5){
-            frequency_note = 415.30;
-            printf("Playing  F' : FA'\n");
+            note_to_play = 7;
+            printf("Playing  F' : FA'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 4){
-            frequency_note = 207.65;
-            printf("Playing  F : FA\n");
+            note_to_play = 8;
+            printf("Playing  F : FA\nPressed keys : %d\n", pressed_count);
           }
     }
 
@@ -165,12 +163,12 @@ void check_saxophone_notes() {
         keys_pressed[KEY_I]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 5){
-            frequency_note = 440.00;
-            printf("Playing  F#' : FA#'\n");
+            note_to_play = 9;
+            printf("Playing  F#' : FA#'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 4){
-            frequency_note = 220.00;
-            printf("Playing  F# : FA#\n");
+            note_to_play = 10;
+            printf("Playing  F# : FA#\nPressed keys : %d\n", pressed_count);
           }
     }
 
@@ -178,48 +176,48 @@ void check_saxophone_notes() {
         keys_pressed[KEY_G]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 5){
-            frequency_note = 493.88;
-            printf("Playing  G#' : SOL#'\n");
+            note_to_play = 11;
+            printf("Playing  G#' : SOL#'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 4){
-            frequency_note = 246.94;
-            printf("Playing  G# : SOL#\n");
+            note_to_play = 12;
+            printf("Playing  G# : SOL#\nPressed keys : %d\n", pressed_count);
           }
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_T]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 4){
-            frequency_note = 466.16;
-            printf("Playing  G' : SOL'\n");
+            note_to_play = 13;
+            printf("Playing  G' : SOL'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 3){
-            frequency_note = 233.08;
-            printf("Playing  G : SOL\n");
+            note_to_play = 14;
+            printf("Playing  G : SOL\nPressed keys : %d\n", pressed_count);
           }
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R] && keys_pressed[KEY_V]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 4){
-            frequency_note = 554.37;
-            printf("Playing  Bb' : SIb'\n");
+            note_to_play = 15;
+            printf("Playing  Bb' : SIb'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 3){
-            frequency_note = 277.18;
-            printf("Playing  Bb : SIb\n");
+            note_to_play = 16;
+            printf("Playing  Bb : SIb\nPressed keys : %d\n", pressed_count);
           }
     }
 
     if (keys_pressed[KEY_W] && keys_pressed[KEY_R]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 3){
-            frequency_note = 523.25;
-            printf("Playing  A' : LA'\n");
+            note_to_play = 17;
+            printf("Playing  A' : LA'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 2){
-            frequency_note = 261.63;
-            printf("Playing  A : LA\n");
+            note_to_play = 18;
+            printf("Playing  A : LA\nPressed keys : %d\n", pressed_count);
           }
     }
 
@@ -227,41 +225,41 @@ void check_saxophone_notes() {
     if (keys_pressed[KEY_W]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 2){
-            frequency_note = 587.33;
-            printf("Playing   B' : SI'\n");
+            note_to_play = 19;
+            printf("Playing   B' : SI'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 1){
-            frequency_note = 293.66;
-            printf("Playing   B : SI\n");
+            note_to_play = 20;
+            printf("Playing   B : SI\nPressed keys : %d\n", pressed_count);
           }
     }
 
     if (keys_pressed[KEY_R]){
         if(keys_pressed[OCTAVE_KEY])
           if (pressed_count == 2){
-            frequency_note = 622.25;
-            printf("Playing   C' : DO'\n");
+            note_to_play = 21;
+            printf("Playing   C' : DO'\nPressed keys : %d\n", pressed_count);
           }
           if (pressed_count == 1){
-            frequency_note = 311.13;
-            printf("Playing   C : DO\n");
+            note_to_play = 22;
+            printf("Playing   C : DO\nPressed keys : %d\n", pressed_count);
           }
     }
 
 
     if ( (pressed_count == 1) &&
         keys_pressed[OCTAVE_KEY]) {
-            frequency_note = 659.26;
-            printf("Playing C#' : DO#'\n");
+            note_to_play = 23;
+            printf("Playing C#' : DO#'\nPressed keys : %d\n", pressed_count);
     }
 
-    lo_send(t, "/note/frequency", "f", frequency_note);
+    lo_send(t, NOTE, "i", note_to_play);
 
 }
 
 int main() {
-    int fd = open("/dev/input/event0", O_RDONLY);
-    t = lo_address_new("localhost", "5513");
+    int fd = open(KEYBOARD_FILE, O_RDONLY);
+    t = lo_address_new(OSC_HOST, OSC_PORT);
     if (fd == -1) {
         perror("Error opening device");
         return EXIT_FAILURE;
@@ -279,11 +277,12 @@ int main() {
         if (ev.type == EV_KEY) {
             if (ev.value == 1) { // Key pressed
                 keys_pressed[ev.code] = true; // Mark key as pressed
+                lo_send(t, VOLUME, "f", 1.0);
+                printf("Key pressed %d\n", ev.code);
             } else if (ev.value == 0) { // Key released
                 keys_pressed[ev.code] = false; // Mark key as released
-                int pressed_count = count_pressed_keys();
-                if(pressed_count == 0)
-                  lo_send(t, "/note/frequency", "f", 0);
+                lo_send(t, VOLUME, "f", 0.0);
+                printf("\n\n");
             }
             check_saxophone_notes(); // Check for notes and count pressed keys
         }
