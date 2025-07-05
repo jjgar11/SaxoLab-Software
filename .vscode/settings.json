@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "Makefile.*": "makefile",
+        "fstream": "c",
+        "constants.h": "c",
+        "input.h": "c",
+        "cstdlib": "c",
+        "fcntl.h": "c",
+        "keymap.h": "c"
+    }
+}
