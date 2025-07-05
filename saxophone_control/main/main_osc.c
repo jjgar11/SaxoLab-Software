@@ -24,7 +24,7 @@ int main() {
             handle_input_event(ev.code, ev.value);
             int pressed_count = count_pressed_keys();
             int idx = get_note_index(keys_pressed, pressed_count);
-            if (idx > 0) {
+            if (idx >= 0) {
                 osc_send_note_index(idx);
                 osc_send_volume(0.2);
                 printf("Playing %s\nPressed keys : %d\n", get_note_name(idx), pressed_count);

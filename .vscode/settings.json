@@ -6,6 +6,7 @@
         "input.h": "c",
         "cstdlib": "c",
         "fcntl.h": "c",
-        "keymap.h": "c"
+        "keymap.h": "c",
+        "input_handler.h": "c"
     }
 }
