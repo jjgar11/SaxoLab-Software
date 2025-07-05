@@ -27,8 +27,11 @@ int main() {
             int idx = get_note_index(keys_pressed, pressed_count);
             if (idx >= 0) {
                 unsigned char gain = mouthpiece_gain();
+                osc_send_note(idx);
                 osc_send_volume((gain - 7) * 5.0f / 8);
-                printf("Playing %s\nPressed keys : %d\n", get_note_name(idx), pressed_count);
+                printf("Playing %s\nAt %f Hz\nPressed keys : %d\n", get_note_name(idx), get_note_frequency(idx), pressed_count);
+            } else {
+                osc_send_volume(0.0);
             }
         }
     }

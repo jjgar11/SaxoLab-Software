@@ -25,9 +25,9 @@ int main() {
             int pressed_count = count_pressed_keys();
             int idx = get_note_index(keys_pressed, pressed_count);
             if (idx >= 0) {
-                osc_send_note_index(idx);
+                osc_send_note(idx);
                 osc_send_volume(0.2);
-                printf("Playing %s\nPressed keys : %d\n", get_note_name(idx), pressed_count);
+                printf("Playing %s\nAt %f Hz\nPressed keys : %d\n", get_note_name(idx), get_note_frequency(idx), pressed_count);
             } else {
                 osc_send_volume(0.0);
             }

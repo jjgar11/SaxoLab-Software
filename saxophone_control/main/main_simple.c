@@ -22,8 +22,9 @@ int main() {
             handle_input_event(ev.code, ev.value);
             int pressed_count = count_pressed_keys();
             int idx = get_note_index(keys_pressed, pressed_count);
-            if (idx >= 0)
-                printf("Playing %s\nPressed keys : %d\n", get_note_name(idx), pressed_count);
+            if (idx >= 0) {
+                printf("Playing %s\nAt %f Hz\nPressed keys : %d\n", get_note_name(idx), get_note_frequency(idx), pressed_count);
+            }
         }
     }
     close(fd);
