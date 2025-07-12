@@ -19,6 +19,8 @@ int main() {
     osc_init();
 
     struct input_event ev;
+    float volume = 0;
+    printf("base volume: %.2f\n", volume);
 
     while (read(fd, &ev, sizeof(ev)) > 0) {
         if (ev.type == EV_KEY) {
@@ -28,8 +30,9 @@ int main() {
             if (idx >= 0) {
                 unsigned char gain = mouthpiece_gain();
                 osc_send_note(idx);
-                osc_send_volume((gain - 7) * 5.0f / 8);
-                printf("Playing %s\nAt %f Hz\nPressed keys : %d\n", get_note_name(idx), get_note_frequency(idx), pressed_count);
+                volume = (gain - 7) * 5.0f / 8;
+                osc_send_volume(volume);
+                printf("Playing %s\tAt %f Hz\tVolume: %.2f\n", get_note_name(idx), get_note_frequency(idx), volume);
             } else {
                 osc_send_volume(0.0);
             }
