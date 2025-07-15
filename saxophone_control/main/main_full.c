@@ -19,22 +19,28 @@ int main() {
     osc_init();
 
     struct input_event ev;
-    float volume = 0;
-    printf("base volume: %.2f\n", volume);
+    double volume = 0;
+    printf("base volume: %.2lf\n", volume);
 
     while (read(fd, &ev, sizeof(ev)) > 0) {
         if (ev.type == EV_KEY) {
             handle_input_event(ev.code, ev.value);
+
             int pressed_count = count_pressed_keys();
             int idx = get_note_index(keys_pressed, pressed_count);
+
             if (idx >= 0) {
-                unsigned char gain = mouthpiece_gain();
-                osc_send_note(idx);
-                volume = (gain - 7) * 5.0f / 8;
+                int gain = mouthpiece_gain();
+                usleep(50000);
+                volume = (gain - 130.0f) / (250 - 130.0f);
                 osc_send_volume(volume);
-                printf("Playing %s\tAt %f Hz\tVolume: %.2f\n", get_note_name(idx), get_note_frequency(idx), volume);
-            } else {
-                osc_send_volume(0.0);
+                printf("Gain: %d\tVolume: %.2lf\n", gain, volume);
+
+                osc_send_note(idx);
+                printf("Playing %s\tAt %f Hz\tVolume: %.2f\n", 
+                    get_note_name(idx), 
+                    get_note_frequency(idx), 
+                    volume);
             }
         }
     }

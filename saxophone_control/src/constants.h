@@ -14,6 +14,7 @@
 #define FREQ            PREFIX "/frequency"
 
 #define MOUTHPIECE      "/dev/i2c-3"
+#define MCP3221_ADDR    0x4D
 
 
 #define CONTROL_TYPE    "idx"    /* or freq */
