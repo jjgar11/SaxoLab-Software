@@ -52,6 +52,6 @@ int mouthpiece_gain(void) {
     }
 
     int gain = ((data[0] << 8) | data[1]) >> 4;
-    printf("Data read from device 0x%02X: 0x%02X \n", MCP3221_ADDR, gain);
+    // printf("Data read from device 0x%02X: 0x%02X \n", MCP3221_ADDR, gain);
     return gain;
 }
