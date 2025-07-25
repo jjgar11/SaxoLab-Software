@@ -20,10 +20,13 @@ int main() {
     while (read(fd, &ev, sizeof(ev)) > 0) {
         if (ev.type == EV_KEY) {
             handle_input_event(ev.code, ev.value);
-            int pressed_count = count_pressed_keys();
-            int idx = get_note_index(keys_pressed, pressed_count);
+
+            int idx = get_note_index(keys_pressed);
+
             if (idx >= 0) {
-                printf("Playing %s\tAt %f Hz\n", get_note_name(idx), get_note_frequency(idx));
+                printf("Playing %s\tAt %f Hz\n", 
+                    get_note_name(idx), 
+                    get_note_frequency(idx));
             }
         }
     }

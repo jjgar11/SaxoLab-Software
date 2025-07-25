@@ -18,18 +18,22 @@ int main() {
     osc_init();
 
     struct input_event ev;
-    float volume = 0.2;
+    double volume = 0.2;
     printf("base volume: %.2f\n", volume);
 
     while (read(fd, &ev, sizeof(ev)) > 0) {
         if (ev.type == EV_KEY) {
             handle_input_event(ev.code, ev.value);
-            int pressed_count = count_pressed_keys();
-            int idx = get_note_index(keys_pressed, pressed_count);
+
+            int idx = get_note_index(keys_pressed);
+
             if (idx >= 0) {
                 osc_send_note(idx);
                 osc_send_volume(volume);
-                printf("Playing %s\tAt %f Hz\tVolume: %.2f\n", get_note_name(idx), get_note_frequency(idx), volume);
+                printf("Playing %s\tAt %f Hz\tVolume: %.2f\n", 
+                    get_note_name(idx), 
+                    get_note_frequency(idx), 
+                    volume);
             } else {
                 osc_send_volume(0.0);
             }

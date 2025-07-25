@@ -1,7 +1,8 @@
 // constants.h
 #pragma once
 
-#define MAX_KEYS        256 // Maximum number of keys
+#define MAX_KEYS        20 // Maximum number of keys
+#define MAX_COMB_SIZE   8  // Maximum number of keys combination
 #define KEYBOARD_FILE   "/dev/input/event1"
 #define OCTAVE_KEY      KEY_Z // Adjust based on your keyboard layout
 

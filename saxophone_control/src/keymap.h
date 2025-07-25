@@ -1,7 +1,7 @@
 #pragma once
 #include <stdbool.h>
 
-int get_note_index(bool keys_pressed[], int pressed_count);
+int get_note_index(bool keys_pressed[]);
 
 float get_note_frequency(int note_index);
 

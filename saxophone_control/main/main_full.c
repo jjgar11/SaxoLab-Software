@@ -41,8 +41,7 @@ int main() {
         if (ev.type == EV_KEY) {
             handle_input_event(ev.code, ev.value);
 
-            int pressed_count = count_pressed_keys();
-            int idx = get_note_index(keys_pressed, pressed_count);
+            int idx = get_note_index(keys_pressed);
 
             if (idx >= 0) {
                 osc_send_note(idx);
