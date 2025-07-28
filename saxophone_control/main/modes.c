@@ -27,6 +27,11 @@ void free_mode(int fd) {
         if (ev.type == EV_KEY) {
             handle_input_event(ev.code, ev.value);
 
+            if (is_exit_combination(keys_pressed)) {
+                printf("Saliendo del modo libre...\n");
+                break;
+            }
+
             int idx = get_note_index(keys_pressed);
 
             if (idx >= 0) {

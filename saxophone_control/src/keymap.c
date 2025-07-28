@@ -44,8 +44,10 @@ static struct {
     {      0, { }, ""},
 };
 
+const int notes_count = sizeof(notes) / sizeof(notes[0]);
+
 int get_note_index(bool keys_pressed[]) {
-    for (int i = 0; i < sizeof(notes)/sizeof(notes[0]); i++) {
+    for (int i = 0; i < notes_count; i++) {
         bool match = true;
 
         for (int j = 0; j < MAX_COMB_SIZE; j++) {
@@ -85,4 +87,20 @@ float get_note_frequency(int note_index) {
 
 const char* get_note_name(int note_index) {
     return (note_index >= 0) ? notes[note_index].name : "";
+}
+
+bool is_exit_combination(bool keys_pressed[]) {
+    static const int exit_keys[] = {13, 14, 15, 16};
+    for (int i = 0; i < 4; i++) {
+        if (!keys_pressed[exit_keys[i]]) return false;
+    }
+    return true;
+}
+
+int get_random_note_index() {
+    int idx;
+    do {
+        idx = rand() % notes_count;
+    } while (get_note_frequency(idx) == 0);
+    return idx;
 }

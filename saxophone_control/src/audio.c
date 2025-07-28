@@ -33,7 +33,7 @@ void stop_faust() {
     }
 }
 
-void play_mp3(const char* filename) {
+void play_audio(const char* filename) {
     char filepath[256];
     snprintf(filepath, sizeof(filepath), "%s%s%s", AUDIO_PREFIX, filename, AUDIO_EXT);
     printf("Reproduciendo %s\n", filepath);

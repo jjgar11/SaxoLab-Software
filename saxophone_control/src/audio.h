@@ -4,4 +4,4 @@ void start_faust();
 
 void stop_faust();
 
-void play_mp3(const char* filename);
+void play_audio(const char* filename);

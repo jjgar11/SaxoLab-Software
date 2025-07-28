@@ -21,30 +21,31 @@ int main() {
 
     struct input_event ev;
 
-    play_mp3("bienvenido");
+    play_audio("bienvenido");
 
-    while (1)
-    {
-        play_mp3("menu");
-        play_mp3("modo");
-        while (read(fd, &ev, sizeof(ev)) > 0) {
-            if (ev.type == EV_KEY && ev.value == 1) {
+    while (1) {
+        play_audio("menu");
+        play_audio("modo");
+
+        while (1) {
+            if (read(fd, &ev, sizeof(ev)) > 0 && ev.type == EV_KEY && ev.value == 1) {
                 if (
                     ev.code == 4 || 
                     ev.code == 5 || 
                     ev.code == 6 || 
                     ev.code == 7
                 ) {
-                    play_mp3("libre");
+                    play_audio("libre");
                     free_mode(fd);
-                }
-                else if (
+                    break;
+                } else if (
                     ev.code == 8 || 
                     ev.code == 9 || 
                     ev.code == 10
                 ) {
-                    play_mp3("entrenamiento");
+                    play_audio("entrenamiento");
                     training_mode(fd);
+                    break;
                 }
             }
         }
