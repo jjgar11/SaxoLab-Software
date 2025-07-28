@@ -3,16 +3,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 #include <pthread.h>
 #include <stdlib.h>
 
 #include "./modes.h"
+#include "../src/mcp3221.h"
 #include "../src/audio.h"
 #include "../src/constants.h"
 
 
 int main() {
-    
     int fd = open(KEYBOARD_FILE, O_RDONLY);
     if (fd == -1) {
         perror("Error opening device");

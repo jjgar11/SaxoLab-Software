@@ -17,6 +17,7 @@
         "osc_handler.h": "c",
         "modes.h": "c",
         "pthread.h": "c",
-        "audio.h": "c"
+        "audio.h": "c",
+        "signal.h": "c"
     }
 }

@@ -10,3 +10,5 @@ const char* get_note_name(int note_index);
 bool is_exit_combination(bool keys_pressed[]);
 
 int get_random_note_index();
+
+void clean_keys (bool keys_pressed[]);

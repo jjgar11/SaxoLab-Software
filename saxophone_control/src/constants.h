@@ -19,6 +19,7 @@
 
 #define AUDIO_PREFIX    "audios_wav/"
 #define AUDIO_EXT       ".wav"
+#define WAIT_TIMEOUT    10
 
 
 #define CONTROL_TYPE    "idx"    /* or freq */

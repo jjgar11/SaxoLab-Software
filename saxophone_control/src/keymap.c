@@ -22,7 +22,7 @@ static struct {
     { 233.08, {1, 2, 3}, "G' : SOL'"},
     { 246.94, {1, 2, 3, 15, 16}, "G#' : SOL#'"},
     { 261.63, {1, 2}, "A' : LA'"},
-    { 277.18, {1, 2, 22}, "Bb' : SIb'"},
+    { 0, {1, 2, 22}, "Bb' : SIb'"},
     {      0, { }, ""},
     { 311.13, {1}, "B' : SI'"},
     {      0, { }, ""},
@@ -34,7 +34,7 @@ static struct {
     { 466.16, {1, 2, 3, 16}, "G' : SOL'"},
     { 493.88, {1, 2, 3, 15}, "G#' : SOL#'"},
     { 523.25, {1, 2, 16}, "A' : LA'"},
-    { 554.37, {1, 2, 22, 16}, "Bb' : SIb'"},
+    { 0, {1, 2, 22, 16}, "Bb' : SIb'"},
     { 587.33, {1, 16}, "B' : SI'"},
     {      0, { }, ""},
     { 659.26, {16}, "C#' : DO#'"},
@@ -94,7 +94,14 @@ bool is_exit_combination(bool keys_pressed[]) {
     for (int i = 0; i < 4; i++) {
         if (!keys_pressed[exit_keys[i]]) return false;
     }
+    clean_keys(keys_pressed);
     return true;
+}
+
+void clean_keys (bool keys_pressed[]) {
+    for (int i = 0; i < MAX_KEYS; i++) {
+        keys_pressed[i] = false;
+    }
 }
 
 int get_random_note_index() {
