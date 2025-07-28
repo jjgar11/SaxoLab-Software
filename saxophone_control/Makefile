@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I./src
 SRC=src
-MAIN=main
+MAIN=keyboard_test
 BIN = bin
 
 all: $(BIN) $(BIN)/simple $(BIN)/osc $(BIN)/full
