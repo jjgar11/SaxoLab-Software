@@ -11,16 +11,6 @@
 #include "../src/mcp3221.h"
 #include "../src/constants.h"
 
-void* pressure_loop(void* arg) {
-    while (1) {
-        int gain = mouthpiece_gain();
-        double volume = (gain - 130.0f) / (200 - 130.0f);
-        osc_send_volume(volume);
-        usleep(5000);
-        // printf("Gain: %d\tVolume: %.2lf\n", gain, volume);
-    }
-    return NULL;
-}
 
 int main() {
     int fd = open(KEYBOARD_FILE, O_RDONLY);
@@ -34,8 +24,6 @@ int main() {
     pthread_create(&thread, NULL, pressure_loop, NULL);
 
     struct input_event ev;
-    double volume = 0;
-    printf("base volume: %.2lf\n", volume);
 
     while (read(fd, &ev, sizeof(ev)) > 0) {
         if (ev.type == EV_KEY) {
@@ -45,10 +33,9 @@ int main() {
 
             if (idx >= 0) {
                 osc_send_note(idx);
-                printf("Playing %s\tAt %f Hz\tVolume: %.2f\n", 
+                printf("Playing %s\tAt %f Hz\n", 
                     get_note_name(idx), 
-                    get_note_frequency(idx), 
-                    volume);
+                    get_note_frequency(idx));
             }
         }
     }

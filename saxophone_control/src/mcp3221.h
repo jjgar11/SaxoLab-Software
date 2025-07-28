@@ -1,3 +1,3 @@
 #pragma once
 
-int mouthpiece_gain(void);
+void* pressure_loop(void* arg);

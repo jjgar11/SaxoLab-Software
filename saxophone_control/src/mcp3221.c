@@ -1,3 +1,4 @@
+#include "osc_handler.h"
 #include "mcp3221.h"
 #include "constants.h"
 #include <fcntl.h>
@@ -33,7 +34,7 @@ static int reopen_i2c() {
     return 0;
 }
 
-int mouthpiece_gain(void) {
+static int mouthpiece_gain(void) {
     if (i2c_fd < 0 && reopen_i2c() < 0)
         return -1;
 
@@ -52,6 +53,15 @@ int mouthpiece_gain(void) {
     }
 
     int gain = ((data[0] << 8) | data[1]) >> 4;
-    // printf("Data read from device 0x%02X: 0x%02X \n", MCP3221_ADDR, gain);
     return gain;
+}
+
+void* pressure_loop(void* arg) {
+    while (1) {
+        int gain = mouthpiece_gain();
+        double volume = (gain - 130.0f) / (200 - 130.0f);
+        osc_send_volume(volume);
+        usleep(5000);
+    }
+    return NULL;
 }
