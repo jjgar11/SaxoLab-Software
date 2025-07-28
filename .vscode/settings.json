@@ -14,6 +14,9 @@
         "stdlib.h": "c",
         "stdio.h": "c",
         "stdint.h": "c",
-        "osc_handler.h": "c"
+        "osc_handler.h": "c",
+        "modes.h": "c",
+        "pthread.h": "c",
+        "audio.h": "c"
     }
 }

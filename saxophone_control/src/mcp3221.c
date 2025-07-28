@@ -1,5 +1,5 @@
-#include "osc_handler.h"
 #include "mcp3221.h"
+#include "osc_handler.h"
 #include "constants.h"
 #include <fcntl.h>
 #include <unistd.h>
